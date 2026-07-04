@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>低空新视界 - 无人机创研营</title>
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-bg {
+      background-image: linear-gradient(140deg, rgba(4,11,26,0.95), rgba(6,26,60,0.65)),
+        url('images/第二页/广东深圳.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .section-divider {
+      position: relative;
+    }
+    .section-divider::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(242,169,0,0.12), transparent 45%),
+                  radial-gradient(circle at 80% 0%, rgba(31,75,173,0.15), transparent 35%);
+      z-index: 0;
+    }
+    .section-divider > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .check-list p {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .check-list i {
+      color: var(--color-accent);
+      margin-top: 0.2rem;
+    }
+  </style>
+</head>
+<body class="page page-index">
+  <nav id="site-nav" class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        低空新视界
+      </a>
+      <div class="nav-links">
+        <a href="province.html">中国各省份航拍</a>
+        <a href="categories.html">无人机分类与实操</a>
+        <a href="explore.html">低空探索</a>
+        <a href="share.html">航拍分享</a>
+      </div>
+      <a href="explore.html" class="nav-cta">进入低空实验室</a>
+    </div>
+  </nav>
+
+  <!-- ===== 顶部三分布导航卡片（模仿参考图） ===== -->
+  <section class="top-three-nav">
+    <div class="container">
+      <div class="top-three-grid">
+        <!-- 卡片1：中国各省份航拍 -->
+        <a href="province.html" class="top-nav-card">
+          <div class="top-nav-card-img" style="background-image: url('images/第二页/上海.jpg');">
+            <div class="top-nav-card-overlay">
+              <span class="top-nav-badge">34 省市</span>
+              <h2>中国各省份<br>航拍</h2>
+              <p>实拍素材 · 拍摄技巧</p>
+            </div>
+          </div>
+        </a>
+        <!-- 卡片2：无人机分类与实操 -->
+        <a href="categories.html" class="top-nav-card">
+          <div class="top-nav-card-img" style="background-image: url('images/无人机分类/按平台构型分/平台构型分类.jpg');">
+            <div class="top-nav-card-overlay">
+              <span class="top-nav-badge">5 大维度</span>
+              <h2>无人机分类<br>与实操</h2>
+              <p>机型解析 · 操控图解</p>
+            </div>
+          </div>
+        </a>
+        <!-- 卡片3：低空探索 -->
+        <a href="explore.html" class="top-nav-card">
+          <div class="top-nav-card-img" style="background-image: url('images/低空融媒/new1.png');">
+            <div class="top-nav-card-overlay">
+              <span class="top-nav-badge">2026 最新</span>
+              <h2>低空探索<br>特辑</h2>
+              <p>融媒 · 科普 · 实践</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <header class="hero hero-full hero-bg">
+     <style>
+       /* 仅修改h1大字和数据数字颜色，其他样式不改动 */
+       .hero-content h1 {
+         color: #4fc3f7; /* 蓝色系-天空蓝（大字） */
+       }
+       .stat-card p {
+         color: #2196f3; /* 蓝色系-经典蓝（数字） */
+       }
+     </style>
+     <div class="container hero-content">
+       <p class="hero-tag">Campus UAV Studio · 2026</p >
+       <h1>
+         把视角抬升到云端，用NUAAer的脑洞
+         <br>解锁无人机与低空经济的真实样貌
+       </h1>
+       <p>
+         我们将中国各省份航拍、专业资料、校园团队的现场实验以及 2026 年最新的低空经济政策整合成三个清爽的页面。<br>
+         想看各省航拍质感、想补无人机科普、或是想跟进低空实践，都能在这里找到入口。
+       </p >
+       <div class="button-row">
+         <a href="province.html" class="button button-primary">找一张最想收藏的航拍</a >
+         <a href="categories.html" class="button button-outline">先把无人机机型搞懂</a >
+       </div>
+       <div class="stats-grid">
+         <article class="stat-card">
+           <p>34</p >
+           <span>覆盖全国重点省市航拍样本</span>
+         </article>
+         <article class="stat-card">
+           <p>5 条</p >
+           <span>实时低空融媒链接，含标准 2.0 动态</span>
+         </article>
+         <article class="stat-card">
+           <p>2026最新</p >
+           <span>引用央视、央媒对低空经济最新预测</span>
+         </article>
+       </div>
+     </div>
+   </header>
+
+  <main class="section-divider">
+    <div class="container">
+      <section class="section">
+        <div class="section-intro">
+          <p class="section-label">Stage 01</p>
+          <h2 class="section-title">三个入口，一键到达</h2>
+          <p class="section-description">
+            主页只是抛砖，真正的内容在三个二级页面里：中国各省份航拍、无人机分类与操作、以及低空探索。
+          </p>
+        </div>
+        <div class="grid-auto">
+          <article class="glass-panel">
+            <span class="icon-circle"><i class="fa fa-map-o" aria-hidden="true"></i></span>
+            <h3>《中国各省份航拍》</h3>
+            <p>
+              基于实拍素材，把 34 省市的航拍纹理做成卡片，同时附上拍摄提示，适合灵感收集或课程展示。
+            </p>
+            <a href="province.html" class="link-accent">
+              打开相册 <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <article class="glass-panel">
+            <span class="icon-circle"><i class="fa fa-sitemap" aria-hidden="true"></i></span>
+            <h3>《无人机分类 & 操作合集》</h3>
+            <p>
+              结合无人机常用的五大分类维度，加上我们在练习时的操作动作示意图，帮助理清无人机型号与手感。
+            </p>
+            <a href="categories.html" class="link-accent">
+              进入实操笔记 <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <article class="glass-panel">
+            <span class="icon-circle"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+            <h3>《低空探索特辑》</h3>
+            <p>
+              聚合低空融媒、三航科普、低空实践案例，附上 2026 年政策热点和可点击的原始报道，方便学习。
+            </p>
+            <a href="explore.html" class="link-accent">
+              打开低空特辑 <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="highlight-card">
+          <div>
+            <p class="section-label">2026 快照</p>
+            <h3 class="section-title">低空经济真的起飞了吗？</h3>
+            <p class="section-description">
+              央视财经 2026 年 7 月报道给出全国低空经济市场规模突破万亿元的预测，
+              各地正通过标准体系、示范区和赛事把空域利用从概念拉回现实。
+              我们把关键信息拆条写进专题页，保持“可验证原文”的底线。
+            </p>
+            <div class="check-list">
+              <p><i class="fa fa-check" aria-hidden="true"></i><span>深圳发布低空经济标准体系 2.0，示范应用更细化。</span></p>
+              <p><i class="fa fa-check" aria-hidden="true"></i><span>四川成立省级低空经济产业研究院，为西部提供智库支撑。</span></p>
+              <p><i class="fa fa-check" aria-hidden="true"></i><span>广州确认举办 2026 国际低空经济贸易博览会，整合无人系统大会。</span></p>
+            </div>
+          </div>
+          <div class="two-column">
+            <div class="metric-card">
+              <p class="section-description" style="margin:0 0 0.4rem;">市场规模预测</p>
+              <h4 style="margin:0 0 0.4rem;font-size:2.6rem;">1 万亿+</h4>
+              <small>数据源：央视财经 2026.07.</small>
+            </div>
+            <div class="metric-card alt">
+              <p style="margin:0 0 0.6rem;">地方政策</p>
+              <h4 style="margin:0 0 0.3rem;font-size:2.6rem;">3 大热点</h4>
+              <small>深圳 · 四川 · 广州</small>
+            </div>
+          </div>
+          <div class="metric-card" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.85);">
+            <h4 style="margin:0 0 0.5rem;">数据使用提示</h4>
+            <p style="margin:0;color:rgba(255,255,255,0.75);">
+              所有报道链接已放进《低空探索特辑》，可在 PPT 或报告里直接引用，并附上原文链接方便查验。
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2026 UAV Studio · 素材用于南京航空航天大学刘士熙团队天目启航项目展示。</p>
+      <div class="footer-links">
+        <a href="province.html">中国各省份航拍</a>
+        <a href="categories.html">无人机分类与实操</a>
+        <a href="explore.html">低空探索</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav-scrolled', window.scrollY > 30);
+    });
+  </script>
+</body>
+</html>
+
+

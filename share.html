@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>航拍分享 - 低空新视界</title>
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-share {
+      padding-top: 7rem;
+      padding-bottom: 2.5rem;
+      text-align: center;
+    }
+    .upload-zone {
+      background: rgba(255,255,255,0.04);
+      border: 2px dashed rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: border-color 0.3s, background 0.3s;
+      cursor: pointer;
+      margin-bottom: 2rem;
+    }
+    .upload-zone:hover,
+    .upload-zone.drag-over {
+      border-color: #f2a900;
+      background: rgba(242,169,0,0.06);
+    }
+    .upload-zone i {
+      font-size: 3rem;
+      color: #f2a900;
+      margin-bottom: 1rem;
+    }
+    .upload-zone h3 {
+      margin-bottom: 0.5rem;
+    }
+    .upload-zone p {
+      color: rgba(255,255,255,0.55);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    #file-input {
+      display: none;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: #f8fafa;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #f2a900;
+    }
+    .form-group textarea {
+      min-height: 80px;
+    }
+    .preview-area {
+      display: none;
+      margin: 1.5rem 0;
+    }
+    .preview-area.show {
+      display: block;
+    }
+    .preview-area img {
+      max-height: 300px;
+      border-radius: 14px;
+      margin: 0 auto;
+    }
+    .preview-area .preview-name {
+      text-align: center;
+      margin-top: 0.5rem;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-submit {
+      background: #f2a900;
+      color: #040b1a;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      font-family: inherit;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(242,169,0,0.4);
+    }
+    .btn-submit:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-clear {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 13px 24px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s;
+      font-family: inherit;
+    }
+    .btn-clear:hover {
+      border-color: rgba(255,255,255,0.5);
+      color: #fff;
+    }
+    .share-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 2rem;
+    }
+    @media (min-width: 640px) {
+      .share-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .share-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .share-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .share-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .share-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    .share-card .card-body {
+      padding: 18px 20px 20px;
+    }
+    .share-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+    .share-card .author {
+      font-size: 0.8rem;
+      color: #f2a900;
+      margin-bottom: 6px;
+    }
+    .share-card .desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+    }
+    .share-card .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .share-card .btn-delete {
+      background: none;
+      border: 1px solid rgba(255,80,80,0.4);
+      color: rgba(255,120,120,0.8);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+    .share-card .btn-delete:hover {
+      background: rgba(255,80,80,0.15);
+      border-color: rgba(255,80,80,0.7);
+      color: #ff6666;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .empty-state i {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f2a900;
+      color: #040b1a;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="page page-province">
+  <nav id="site-nav" class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        返回主页
+      </a>
+      <div class="nav-links">
+        <a href="province.html">中国各省份航拍</a>
+        <a href="categories.html">无人机分类与实操</a>
+        <a href="explore.html">低空探索</a>
+        <a href="share.html" class="is-active">航拍分享</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero hero-share">
+    <div class="container hero-content">
+      <p class="hero-tag">Community Gallery</p>
+      <h1 style="color:#1E88E5;">航拍分享</h1>
+      <p class="section-description">
+        同学们可以在这里上传自己的航拍作品，写上拍摄地点和简介，一起丰富我们的云端图库。<br>
+        <small style="color:rgba(255,255,255,0.4);">数据保存在本机浏览器中，同一设备上可累积查看。</small>
+      </p>
+    </div>
+  </header>
+
+  <main class="container" style="padding-bottom:4rem;">
+    <!-- 上传区域 -->
+    <section class="section" style="padding-top:0;">
+      <div id="drop-zone" class="upload-zone">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+        <h3>点击选择航拍照片，或拖拽到此处</h3>
+        <p>支持 JPG / PNG / WebP，单张不超过 10MB</p>
+        <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp">
+      </div>
+
+      <div id="preview" class="preview-area">
+        <img id="preview-img" src="" alt="预览">
+        <p class="preview-name" id="preview-name"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="author-name">你的名字</label>
+        <input type="text" id="author-name" placeholder="例：张三" maxlength="20">
+      </div>
+      <div class="form-group">
+        <label for="photo-title">作品标题</label>
+        <input type="text" id="photo-title" placeholder="例：落日下的紫金山" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label for="photo-desc">拍摄简介</label>
+        <textarea id="photo-desc" placeholder="写一写拍摄地点、使用的机型、拍摄感受……" maxlength="300"></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-submit" id="btn-submit" disabled>
+          <i class="fa fa-check" aria-hidden="true"></i> 发布分享
+        </button>
+        <button class="btn-clear" id="btn-clear">清空重选</button>
+      </div>
+    </section>
+
+    <!-- 展示网格 -->
+    <section class="section" style="padding-top:0;">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Gallery</p>
+          <h2 class="section-title" style="margin-bottom:0;">同学们的作品</h2>
+        </div>
+        <span style="color:rgba(255,255,255,0.4);font-size:0.85rem;" id="photo-count">共 0 张</span>
+      </div>
+      <div id="share-grid" class="share-grid"></div>
+      <div id="empty-state" class="empty-state">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+        <p>还没有人分享航拍照片，来做第一个吧！</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- 图片放大灯箱 -->
+  <div id="image-lightbox" class="lightbox" role="dialog" aria-label="图片预览" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="关闭预览">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <img src="" alt="">
+  </div>
+
+  <!-- Toast 提示 -->
+  <div id="toast" class="toast"></div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2026 UAV Studio · 素材用于南京航空航天大学刘士熙团队天目启航项目展示。</p>
+      <div class="footer-links">
+        <a href="province.html">中国各省份航拍</a>
+        <a href="categories.html">无人机分类与实操</a>
+        <a href="explore.html">低空探索</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'uav_studio_share_photos';
+
+    // ===== DOM 元素 =====
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const previewArea = document.getElementById('preview');
+    const previewImg = document.getElementById('preview-img');
+    const previewName = document.getElementById('preview-name');
+    const authorInput = document.getElementById('author-name');
+    const titleInput = document.getElementById('photo-title');
+    const descInput = document.getElementById('photo-desc');
+    const btnSubmit = document.getElementById('btn-submit');
+    const btnClear = document.getElementById('btn-clear');
+    const shareGrid = document.getElementById('share-grid');
+    const emptyState = document.getElementById('empty-state');
+    const photoCount = document.getElementById('photo-count');
+    const toast = document.getElementById('toast');
+
+    let currentFile = null;
+    let currentDataUrl = null;
+
+    // ===== 从 localStorage 加载已有照片 =====
+    function loadPhotos() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function savePhotos(photos) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(photos));
+    }
+
+    // ===== Toast 提示 =====
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    // ===== 更新提交按钮状态 =====
+    function updateSubmitState() {
+      btnSubmit.disabled = !(currentDataUrl && authorInput.value.trim() && titleInput.value.trim());
+    }
+
+    // ===== 文件选择处理 =====
+    function handleFile(file) {
+      if (!file) return;
+      if (!file.type.match(/^image\/(jpeg|png|webp)$/)) {
+        showToast('请选择 JPG / PNG / WebP 格式的图片');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        showToast('图片大小不能超过 10MB');
+        return;
+      }
+
+      currentFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        currentDataUrl = e.target.result;
+        previewImg.src = currentDataUrl;
+        previewName.textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+        previewArea.classList.add('show');
+        updateSubmitState();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ===== 事件：点击上传 =====
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) handleFile(e.target.files[0]);
+    });
+
+    // ===== 事件：拖拽上传 =====
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+    });
+
+    // ===== 输入框变化 =====
+    authorInput.addEventListener('input', updateSubmitState);
+    titleInput.addEventListener('input', updateSubmitState);
+
+    // ===== 清空 =====
+    btnClear.addEventListener('click', () => {
+      currentFile = null;
+      currentDataUrl = null;
+      fileInput.value = '';
+      previewImg.src = '';
+      previewName.textContent = '';
+      previewArea.classList.remove('show');
+      authorInput.value = '';
+      titleInput.value = '';
+      descInput.value = '';
+      btnSubmit.disabled = true;
+    });
+
+    // ===== 图片压缩（解决 localStorage 5MB 限制） =====
+    function compressImage(dataUrl, maxWidth, quality) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => resolve(dataUrl); // 压缩失败则用原图
+        img.src = dataUrl;
+      });
+    }
+
+    // ===== 提交分享 =====
+    btnSubmit.addEventListener('click', async () => {
+      if (!currentDataUrl || !authorInput.value.trim() || !titleInput.value.trim()) return;
+
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = '压缩处理中...';
+
+      // 先压缩图片再存储
+      let finalDataUrl;
+      try {
+        finalDataUrl = await compressImage(currentDataUrl, 1200, 0.7);
+      } catch (e) {
+        finalDataUrl = currentDataUrl;
+      }
+
+      const photo = {
+        id: Date.now(),
+        dataUrl: finalDataUrl,
+        author: authorInput.value.trim(),
+        title: titleInput.value.trim(),
+        desc: descInput.value.trim(),
+        time: new Date().toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+      };
+
+      const photos = loadPhotos();
+      photos.unshift(photo);
+
+      // 尝试保存，如果超出容量则移除旧照片
+      try {
+        savePhotos(photos);
+      } catch (e) {
+        // localStorage 满了，从最旧的开始删除
+        while (photos.length > 1) {
+          photos.pop();
+          try {
+            savePhotos(photos);
+            break; // 保存成功
+          } catch (e2) {
+            continue; // 继续删
+          }
+        }
+        if (photos.length <= 1) {
+          try { savePhotos(photos); } catch (e3) {
+            showToast('❌ 图片太大，浏览器存储空间不足，请使用更小的图片');
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i> 发布分享';
+            return;
+          }
+        }
+      }
+
+      renderGallery();
+      btnClear.click();
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i> 发布分享';
+      showToast('✅ 分享成功！');
+      shareGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // ===== 删除照片 =====
+    function deletePhoto(id) {
+      let photos = loadPhotos();
+      photos = photos.filter(p => p.id !== id);
+      savePhotos(photos);
+      renderGallery();
+      showToast('已删除');
+    }
+
+    // ===== 渲染照片墙 =====
+    function renderGallery() {
+      const photos = loadPhotos();
+      shareGrid.innerHTML = '';
+
+      if (photos.length === 0) {
+        emptyState.style.display = 'block';
+        photoCount.textContent = '共 0 张';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      photoCount.textContent = '共 ' + photos.length + ' 张';
+
+      photos.forEach(photo => {
+        const card = document.createElement('article');
+        card.className = 'share-card';
+        card.innerHTML = `
+          <img src="${photo.dataUrl}" alt="${photo.title}" loading="lazy">
+          <div class="card-body">
+            <h3>${escapeHtml(photo.title)}</h3>
+            <p class="author"><i class="fa fa-user" aria-hidden="true" style="margin-right:4px;"></i>${escapeHtml(photo.author)}</p>
+            ${photo.desc ? '<p class="desc">' + escapeHtml(photo.desc) + '</p>' : ''}
+            <div class="meta">
+              <span>${photo.time}</span>
+              <button class="btn-delete" data-id="${photo.id}">
+                <i class="fa fa-trash-o" aria-hidden="true"></i> 删除
+              </button>
+            </div>
+          </div>
+        `;
+        shareGrid.appendChild(card);
+      });
+
+      // 绑定删除按钮
+      shareGrid.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (confirm('确定要删除这张照片吗？')) {
+            deletePhoto(Number(btn.dataset.id));
+          }
+        });
+      });
+
+      // 绑定图片点击放大
+      shareGrid.querySelectorAll('.share-card img').forEach(img => {
+        img.addEventListener('click', () => openLightbox(img.src, img.alt));
+      });
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // ===== 灯箱 =====
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    function openLightbox(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('is-visible');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-visible');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+      setTimeout(() => { lightboxImg.src = ''; lightboxImg.alt = ''; }, 200);
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('is-visible')) closeLightbox(); });
+
+    // ===== 导航滚动效果 =====
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav-scrolled', window.scrollY > 30);
+    });
+
+    // ===== 初始化 =====
+    renderGallery();
+  </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>无人机分类与操控图解 - 低空新视界</title>
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-categories {
+      padding-top: 7rem;
+      padding-bottom: 3rem;
+      text-align: center;
+    }
+    .section-note {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body class="page page-categories">
+  <nav id="site-nav" class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        回到主页
+      </a>
+      <div class="nav-links">
+        <a href="province.html">中国各省份航拍</a>
+        <a href="categories.html" class="is-active">无人机分类与实操</a>
+        <a href="explore.html">低空探索</a>
+        <a href="share.html">航拍分享</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero hero-categories">
+       <div class="container hero-content">
+         <p class="hero-tag">UAV System Notes</p >
+         <!-- 沿用经典蓝#1E88E5，与上一页标题色系一致 -->
+         <h1 style="color:#1E88E5;">分类要讲得清楚，操控手感要能复现</h1>
+         <p class="section-description">
+           这一页把无人机分类整理成图文卡片，
+           图像素材来自 <code>images/无人机分类/</code>，操作动作示意取自 <code>images/无人机基础教学/</code>。
+         </p >
+       </div>
+     </header>
+
+  <main class="container" style="padding-bottom:4rem;">
+    <section class="section">
+      <div class="section-intro">
+        <span class="section-label">Five Dimensions</span>
+        <h2 class="section-title">五大分类维度速览</h2>
+        <p class="section-description">
+          题目常围绕“划分依据 + 代表机型 + 场景”展开，我把要点拆进每张卡片，内容更聚焦。
+        </p>
+      </div>
+      <div class="card-grid">
+        <article class="classification-card">
+          <img src="images/无人机分类/按使用功能分/使用功能分类.jpg" alt="按使用功能分类">
+          <h3>按使用功能</h3>
+          <p>最常见的划分方式，课堂喜欢问“侦察 vs 农用”的差异。</p>
+          <ul class="section-description" style="list-style:none;padding:0;margin:0;">
+            <li>· 侦察：长航时 + 光电吊舱，重点是稳定性。</li>
+            <li>· 农用植保：载药舱容量、喷幅与航线规划。</li>
+            <li>· 攻击/救援：多传感器协同，需要团队配合。</li>
+          </ul>
+        </article>
+        <article class="classification-card">
+          <img src="images/无人机分类/按平台构型分/平台构型分类.jpg" alt="按平台构型分类">
+          <h3>按平台构型</h3>
+          <p>也就是机体结构，和起降方式息息相关。</p>
+          <ul class="section-description" style="list-style:none;padding:0;margin:0;">
+            <li>· 多旋翼：易控、起降灵活，适合教学场景。</li>
+            <li>· 固定翼：航程远，需跑道或弹射起降。</li>
+            <li>· 直升机 / 飞艇：垂直起降或长时间滞空的典型。</li>
+          </ul>
+        </article>
+        <article class="classification-card">
+          <img src="images/无人机分类/按动力类型分/动力类型分类.jpg" alt="按动力类型分类">
+          <h3>按动力类型</h3>
+          <p>回答要点：能源密度、维护成本、噪声及续航。</p>
+          <ul class="section-description" style="list-style:none;padding:0;margin:0;">
+            <li>· 电动力：结构简单，城市航拍主流。</li>
+            <li>· 油动力：航时长，但震动和保养成本高。</li>
+            <li>· 太阳能/混合动力：科研与高空长航时平台。</li>
+          </ul>
+        </article>
+        <article class="classification-card">
+          <img src="images/无人机分类/按应用领域分/应用领域分类.jpg" alt="按应用领域分类">
+          <h3>按应用领域</h3>
+          <p>编写项目计划书时，直接以领域拆分最清晰。</p>
+          <ul class="section-description" style="list-style:none;padding:0;margin:0;">
+            <li>· 军用：隐身、抗干扰，强调作战体系。</li>
+            <li>· 民用：测绘、电力巡检、应急救援等。</li>
+            <li>· 消费：航拍、运动、创作，体验优先。</li>
+          </ul>
+        </article>
+        <article class="classification-card" style="grid-column:span 2;">
+          <img src="images/无人机分类/按性能指标分/性能指标分类.jpg" alt="按性能指标分类" style="height:260px;">
+          <h3>按性能指标</h3>
+          <p>可用于写技术方案或答辩 PPT 时展示“体量 vs 任务”。</p>
+          <div class="two-column" style="gap:1rem;">
+            <div class="section-description">
+              <p>· 微/小型：课堂演示、编队飞行</p>
+              <p>· 中型：航测、行业应用的主力</p>
+              <p>· 大型：运载/运输、实验平台</p>
+            </div>
+            <div class="section-description">
+              <p>指标关注点：</p>
+              <p>· 最大起飞重量</p>
+              <p>· 航程/航时与任务载荷</p>
+              <p>· 抗风等级与飞控冗余</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header" style="flex-direction:column;gap:0.75rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="icon-circle"><i class="fa fa-gamepad" aria-hidden="true"></i></span>
+          <div>
+            <p class="section-label" style="margin-bottom:0.3rem;">Practice Lab</p>
+            <h2 class="section-title" style="margin-bottom:0;">操控动作图解</h2>
+          </div>
+        </div>
+        <p class="section-description" style="text-align:left;">
+          操作图取自 <code>images/无人机基础教学/</code>，我们把平时训练用的动作拆成 6 组，
+          每张图下面附上速记提示，方便直接照做。
+        </p>
+      </div>
+      <div class="card-grid">
+        <article class="operation-card">
+          <img src="images/无人机基础教学/渐远环绕.png" alt="渐远环绕">
+          <div>
+            <h3>渐远环绕</h3>
+            <p>右手向外推、左手轻推偏航。保持 2 m/s 速度最稳。</p>
+            <p class="section-note">提示：拉远过程中监控高度，别让前景遮挡主体。</p>
+          </div>
+        </article>
+        <article class="operation-card">
+          <img src="images/无人机基础教学/贴近环绕.png" alt="贴近环绕">
+          <div>
+            <h3>贴近环绕</h3>
+            <p>将俯仰角收窄，慢速侧飞，强调主体质感。</p>
+            <p class="section-note">提示：务必提前测距，避免误差造成碰撞。</p>
+          </div>
+        </article>
+        <article class="operation-card">
+          <img src="images/无人机基础教学/希区柯克变焦.png" alt="希区柯克变焦">
+          <div>
+            <h3>希区柯克变焦</h3>
+            <p>后退同时拉近镜头焦距，背景产生压缩感。</p>
+            <p class="section-note">提示：用焦距控制器配合自动曝光更稳定。</p>
+          </div>
+        </article>
+        <article class="operation-card">
+          <img src="images/无人机基础教学/前进＋上升.png" alt="前进上升">
+          <div>
+            <h3>前进 + 上升</h3>
+            <p>推杆前进的同时缓慢升高，用于开场镜头。</p>
+            <p class="section-note">提示：姿态倾角大时要注意电机负荷。</p>
+          </div>
+        </article>
+        <article class="operation-card">
+          <img src="images/无人机基础教学/渐远环绕仰拍.png" alt="仰拍环绕">
+          <div>
+            <h3>渐远仰拍环绕</h3>
+            <p>云台向上 15°，突出建筑高度和天空层次。</p>
+            <p class="section-note">提示：注意直射光，必要时装 ND 滤镜。</p>
+          </div>
+        </article>
+        <article class="operation-card">
+          <img src="images/无人机基础教学/正扣旋转下降.png" alt="旋转下降">
+          <div>
+            <h3>正和旋转下降</h3>
+            <p>以航向为中心做螺旋下降，适合收尾镜头。</p>
+            <p class="section-note">提示：提前设定高度下限，防止下洗气流不稳。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <article class="cta-card">
+        <div>
+          <p class="section-label" style="margin-bottom:0.5rem;">Field Notes</p>
+          <h2 class="section-title">延展建议</h2>
+          <p class="section-description">
+            先展示分类卡片，再切换到操作视频，把理论直接映射到实战。
+          </p>
+        </div>
+        <a href="explore.html" class="button button-primary">下一页：低空探索专题</a>
+      </article>
+    </section>
+  </main>
+
+  <div id="image-lightbox" class="lightbox" role="dialog" aria-label="图片预览" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="关闭预览">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <img src="" alt="">
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2025 UAV Studio · 素材用于南京航空航天大学刘士熙团队天目启航项目展示。</p>
+      <div class="footer-links">
+        <a href="province.html">中国各省份航拍</a>
+        <a href="explore.html">低空探索</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('site-nav');
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav-scrolled', window.scrollY > 30);
+    });
+
+    const openLightbox = (img) => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || '';
+      lightbox.classList.add('is-visible');
+      document.body.classList.add('lightbox-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('is-visible');
+      document.body.classList.remove('lightbox-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      setTimeout(() => { lightboxImg.src = ''; lightboxImg.alt = ''; }, 200);
+    };
+
+    // 绑定所有卡片图片：分类卡片 + 操作卡片
+    document.querySelectorAll('.classification-card img, .operation-card img').forEach((img) => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => openLightbox(img));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && lightbox.classList.contains('is-visible')) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
+
